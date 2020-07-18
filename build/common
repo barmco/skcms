@@ -1,7 +1,7 @@
 builddir = $out
 disabled = false
 
-is_mac = (uname | grep -q Drawin)
+not_mac = (uname | grep -qv Darwin)
 
 # Each compiler has enabled all the warnings it can.
 # Here we make them errors, and disable a few we don't want bothering us.
@@ -23,7 +23,7 @@ rule compile_cc
     description = compile $out
 
 rule compile_dylib
-    command = $disabled && $is_mac && touch $out || $cxx -dynamiclib -fpic -o $out $in
+    command = ($disabled || $not_mac) && touch $out || $cxx -dynamiclib -fpic -o $out $in
     description = make dynamic library of $in
 
 include build/targets
