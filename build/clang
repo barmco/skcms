@@ -1,7 +1,7 @@
 cc     = clang
 cxx    = clang++
 cflags = -fcolor-diagnostics -Weverything
-out    = out/clang$mode
+out    = out
 
 include build/local
 include build/common
